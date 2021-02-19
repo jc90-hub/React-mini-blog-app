@@ -4,7 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, first run:
+
+### `npx json-server --watch data/db.json --port 8080`
+
+This runs the json server database (the database is contained in the local db.json file, in the folder called data). Select whichever port you want when running the command, 8080 has been used as an example. It is better to avoid port 3000 as when run with npm start command, the react server will want to run on port 3000 by default.
 
 ### `npm start`
 
