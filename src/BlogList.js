@@ -1,14 +1,26 @@
+import{useState} from 'react';
+
+
 //props object has been destructured from (props) to ({blogs, title})
 const BlogList = ({blogs, title}) => {
-    
-    //const blogs = props.blogs;
-    //const title = props.title;    
+
+    const [displayBlogContent, setdisplayBlogContent] = useState(false); 
+
+    const handleBlogContent = ()=>{
+        
+        setdisplayBlogContent(true)
+    }
+      
     return(
         <div className="blog-list" >
+            <br/>
+            <hr/>
             <h2> {title} </h2>
+            <hr/>
             {blogs.map((blog) => (
-                <div className="blog-preview" key={blog.id}>
+                <div onClick={()=>handleBlogContent()}className="blog-preview" key={blog.id}>
                     <h2>{blog.title}</h2>
+                    {displayBlogContent? <p>{blog.body}</p>:null}
                     <p>Written by {blog.author}</p>
                 </div>                
             ))} 

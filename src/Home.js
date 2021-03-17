@@ -9,10 +9,9 @@ const Home = () => {
         <div className="home">
             {isError && <div>{isError}</div>}
             {isPending && <div>Loading...</div>}
-            {blogs && <BlogList blogs={blogs} title="Blog list:"/>}
+            {blogs && <BlogList blogs={blogs} title="Blogs:"/>}
             <br/>
-            <hr/>
-                        
+            <hr/>                        
         </div>
      );
 

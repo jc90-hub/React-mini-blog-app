@@ -6,11 +6,10 @@ const useFetch = (url) =>{
     const [isError, setIsError] = useState(false)  
 
     useEffect(() =>{
-        const abortCont = new AbortController();
-        
+              
         //Note, this code is using a local db.json file to emulate a database, hence setTimeout is used to mimic the delay from a remote server
         setTimeout(() =>{
-             fetch(url, {signal:abortCont.signal})             
+             fetch(url)             
                  .then(res => {
                      if(!res.ok){
                          throw Error('Unable to fetch the data for that resource')                        
@@ -37,13 +36,13 @@ const useFetch = (url) =>{
                     }
                        
                  })  
-        },500)  
+        },1000)  
         
-        return () => abortCont.abort()
+        // return () => abortCont.abort()
          
      },[url])  
 
-     return {data, isPending, isError}
+     return {data, isError, isPending}
 
 
 }
