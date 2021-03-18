@@ -4,6 +4,7 @@
   margin: 0;
   font-family: "Quicksand";
   color: #333;
+  text-decoration: none;
 }
 .navbar {
   padding: 20px;
@@ -61,7 +62,8 @@
 .blog-details div {
   margin: 20px 0;
 }
-.blog-details button {
+.blog-details .button {
+  text-decoration: none;
   background: #f1356d;
   color: #fff;
   border: 0;

@@ -1,25 +1,21 @@
+import {Link} from 'react-router-dom'
 import { useState} from "react";
 import BlogList from "./BlogList";
-import useFetch from "./useFetch";
-
+import useFetch from "./useFetch"
 const Create = () => {
   
-  let {data:blogs} = useFetch ('http://localhost:8080/blogs')   
+  const {data:blogs} = useFetch ('http://localhost:8080/blogs')  
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('mario');
   const [creating, setCreating] = useState(false)
-  const [blogListUpdated, setblogListUpdated]=useState(false)
+  const [blogListUpdated, setblogListUpdated]=useState(false) 
   
-  
-     const handleSubmit = (e) => {
-
-    
+     const handleSubmit = (e) => {    
+           
       e.preventDefault();
       const blog = { title, body, author };
       setCreating(true)
-      
-  
       setTimeout(()=>{
           fetch('http://localhost:8080/blogs/', {
               method: 'POST',
@@ -28,29 +24,30 @@ const Create = () => {
             })
             .then(() => {
               console.log('new blog added');
-              setCreating(false);
-            
-                          
-            })
-            .then(()=>{setblogListUpdated(true)})
-      },500)    
-    };
-     
+              setCreating(false);                         
+            })           
+            .then(()=>setblogListUpdated(true))
+            .catch((err)=>console.log(err))
+      },500)
+              
+    };   
 
     
   return (
     <div className="create">
       <h2>Add a New Blog</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>Blog title:</label>
         <input 
           type="text" 
           required 
+          minLength="8"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <label>Blog body:</label>
         <textarea
+          type="text"
           required
           value={body}
           onChange={(e) => setBody(e.target.value)}
@@ -60,11 +57,13 @@ const Create = () => {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         >
-          <option value="mario">mario</option>
-          <option value="yoshi">yoshi</option>
+          <option value="mario">Mario</option>
+          <option value="josh">Josh</option>
+          <option value="ken">Ken</option>
         </select>
-        {creating ? <p>Submitting...</p> : <button>Add Blog</button>}        
-        {blogListUpdated ? (<BlogList blogs={blogs} title="Blogs:"/>):null}
+        {creating ? <p>Submitting...</p> : <button onClick={(e)=>{handleSubmit(e)}} type="submit"><Link to="/">Submit</Link></button>}        
+        {blogListUpdated ? (<BlogList blogs={blogs} title="Blogs:" />):null}
+        
       </form>
     </div>
   );

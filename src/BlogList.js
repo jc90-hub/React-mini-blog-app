@@ -4,13 +4,17 @@ import{useState} from 'react';
 //props object has been destructured from (props) to ({blogs, title})
 const BlogList = ({blogs, title}) => {
 
-    const [displayBlogContent, setdisplayBlogContent] = useState(false); 
-
+    const [displayBlogContent, setdisplayBlogContent] = useState(''); 
     const handleBlogContent = ()=>{
+           
+        setdisplayBlogContent(true)   
+        if(displayBlogContent === true){
+            setdisplayBlogContent(false)     
+        }
         
-        setdisplayBlogContent(true)
     }
-      
+
+          
     return(
         <div className="blog-list" >
             <br/>
@@ -23,7 +27,8 @@ const BlogList = ({blogs, title}) => {
                     {displayBlogContent? <p>{blog.body}</p>:null}
                     <p>Written by {blog.author}</p>
                 </div>                
-            ))} 
+            ))
+            } 
         </div>
     )    
 }
